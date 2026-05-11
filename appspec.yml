@@ -1,0 +1,26 @@
+version: 0.0
+os: windows
+
+hooks:
+  ApplicationStop:
+    - location: stop_iis.ps1
+      timeout: 180
+      runas: Administrator
+
+  BeforeInstall:
+    - location: backup_wwwroot.ps1
+      timeout: 300
+      runas: Administrator
+
+  AfterInstall:
+    - location: download_deployment_files.ps1
+      timeout: 300
+      runas: Administrator
+    - location: deploy_files.ps1
+      timeout: 300
+      runas: Administrator
+
+  ApplicationStart:
+    - location: start_iis.ps1
+      timeout: 180
+      runas: Administrator
