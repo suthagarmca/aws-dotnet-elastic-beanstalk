@@ -8,33 +8,38 @@ env:
 
 phases:
   install:
-    runtime-versions:
-      dotnet: 10
     commands:
-      - echo Installing dependencies...
+      - echo Installing .NET 10 SDK...
+      - wget https://dot.net/v1/dotnet-install.sh
+      - chmod +x dotnet-install.sh
+      - ./dotnet-install.sh --channel 10.0
+      - export PATH="$PATH:$HOME/.dotnet"
+      - dotnet --info
 
   pre_build:
     commands:
-      - echo Restoring NuGet packages...
+      - export PATH="$PATH:$HOME/.dotnet"
       - dotnet restore "$PROJECT_FILE"
 
   build:
     commands:
+      - export PATH="$PATH:$HOME/.dotnet"
+
       - echo Building project...
       - dotnet build "$PROJECT_FILE" -c "$BUILD_CONFIGURATION" --no-restore
+
       - echo Publishing app...
       - dotnet publish "$PROJECT_FILE" -c "$BUILD_CONFIGURATION" -o "$PUBLISH_DIR" --no-build
 
   post_build:
     commands:
-      - echo Creating deployment bundle for Elastic Beanstalk...
+      - echo Creating deployment bundle...
       - cd "$PUBLISH_DIR"
-      - zip -r ../deploy.zip .
+      - zip -r "$CODEBUILD_SRC_DIR/deploy.zip" .
 
 artifacts:
   files:
     - deploy.zip
-  discard-paths: yes
 
 cache:
   paths:
