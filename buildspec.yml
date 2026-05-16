@@ -36,7 +36,7 @@ phases:
       - zip -r ../../build.zip .
       - cd ../..
       # appspec.yml and build.zip are already at root, no need to copy
-      - cp stop_iis.ps1 backup_wwwroot.ps1 download_deployment_files.ps1 deploy_files.ps1 start_iis.ps1 .
+      # PowerShell scripts are already at root, no need to copy
 
 
 artifacts:
