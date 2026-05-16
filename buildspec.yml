@@ -31,15 +31,23 @@ phases:
 
   post_build:
     commands:
-      - echo Creating deployment bundle for CodeDeploy...
-      - cp appspec.yml "$PUBLISH_DIR"/appspec.yml
-      - cp stop_iis.ps1 backup_wwwroot.ps1 download_deployment_files.ps1 deploy_files.ps1 start_iis.ps1 "$PUBLISH_DIR"/
-      - cd "$PUBLISH_DIR"
-      - zip -r ../deploy.zip .
+      - echo Creating build.zip for deployment...
+      - cd "$PUBLISH_DIR/web"
+      - zip -r ../../build.zip .
+      - cd ../..
+      - cp appspec.yml build.zip .
+      - cp stop_iis.ps1 backup_wwwroot.ps1 download_deployment_files.ps1 deploy_files.ps1 start_iis.ps1 .
+
 
 artifacts:
   files:
-    - deploy.zip
+    - appspec.yml
+    - build.zip
+    - stop_iis.ps1
+    - backup_wwwroot.ps1
+    - download_deployment_files.ps1
+    - deploy_files.ps1
+    - start_iis.ps1
   discard-paths: yes
 
 cache:
