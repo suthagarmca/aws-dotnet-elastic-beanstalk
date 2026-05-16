@@ -23,7 +23,7 @@ app.MapGet("/", () => Results.Content("""
 <body>
   <main class=\"container\">
     <h1>AWS .NET 10 Web App</h1>
-    <p>Deployed via AWS CodePipeline + CodeBuild to EC2.</p>
+    <p>Deployed via AWS CodePipeline + CodeBuild + CodeDeploy to EC2.</p>
     <section class=\"sample-content\">
       <h2>Sample Content</h2>
       <p>This is sample content added for UI testing.</p>
