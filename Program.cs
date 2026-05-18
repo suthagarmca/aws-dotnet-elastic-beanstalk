@@ -13,18 +13,18 @@ app.UseStaticFiles();
 
 app.MapGet("/", () => Results.Content("""
 <!doctype html>
-<html lang=\"en\">
+<html lang="en">
 <head>
-  <meta charset=\"utf-8\" />
-  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>AWS .NET 10 Web App</title>
-  <link rel=\"stylesheet\" href=\"/css/site.css\" />
+  <link rel="stylesheet" href="/css/site.css" />
 </head>
 <body>
-  <main class=\"container\">
+  <main class="container">
     <h1>AWS .NET 10 Web App</h1>
-    <p>Deployed via AWS CodePipeline + CodeBuild + CodeDeploy to EC2 servers</p>
-    <section class=\"sample-content\">
+    <p>Deployed via AWS CodePipeline + CodeBuild to Elastic Beanstalk.</p>
+    <section class="sample-content">
       <h2>Sample Content</h2>
       <p>This is sample content added for UI testing.</p>
       <ul>
