@@ -16,6 +16,13 @@ if (!(Test-Path $stagingPath)) {
 
 Write-Host "Deploying files from $stagingPath to $destinationPath"
 
+
+# Remove all existing files and folders in the destination path
+if (Test-Path $destinationPath) {
+    Get-ChildItem -Path $destinationPath -Recurse -Force | Remove-Item -Recurse -Force
+    Write-Host "All existing files and folders in $destinationPath have been deleted."
+}
+
 New-Item -ItemType Directory -Path $destinationPath -Force | Out-Null
 Copy-Item -Path (Join-Path $stagingPath "*") -Destination $destinationPath -Recurse -Force
 
